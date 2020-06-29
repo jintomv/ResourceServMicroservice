@@ -1,4 +1,4 @@
-package com.security.ResourceServer.config;
+package com.security.ResourceServer.v1.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -9,11 +9,16 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
-
+/**
+ * 
+ * The class is used for configuring the resource server
+ *
+ */
 @EnableWebSecurity
 public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter{
 
-	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}") String jwkSetUri;
+	@Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}") 
+	String jwkSetUri;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -21,6 +26,8 @@ public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter{
 		http
 			.authorizeRequests(authorizeRequests ->
 				authorizeRequests
+					.antMatchers(HttpMethod.GET,"/v1/fetchUser/{id}").permitAll()
+					.antMatchers("/v1/addUser").permitAll()
 					.antMatchers(HttpMethod.GET, "/message/**").hasAuthority("SCOPE_message:read")
 					.antMatchers(HttpMethod.POST, "/message/**").hasAuthority("SCOPE_message:write")
 					.anyRequest().authenticated()
