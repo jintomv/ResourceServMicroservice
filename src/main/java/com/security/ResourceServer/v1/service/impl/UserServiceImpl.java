@@ -1,6 +1,5 @@
 package com.security.ResourceServer.v1.service.impl;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -58,25 +57,84 @@ public class UserServiceImpl implements UserService{
 	 * Method that persists user object in DB
 	 */
 	public UserResponseDTO addUser(UserRequestDTO userDto) {
+
+		UserResponseDTO userResponsedto = new UserResponseDTO();
+		User user = userDto.toModel(userDto);
+		UserEntity entity = user.toEntity(user);
+		UserEntity savedUser = userRepo.save(entity);
+		if (savedUser != null) {
+			System.out.println("user is saved");
+
+			user.setId(savedUser.getId());
+			user.setUserName(savedUser.getUserName());
+			BeanUtils.copyProperties(user, userResponsedto);
+		}
+		return userResponsedto;
+	}
+	
+	/**
+	 * Method returns the user entity based on
+	 * @param userName
+	 */
+	@Override
+	public UserResponseDTO findByUserName(String userName) {
 		
 		UserResponseDTO userResponsedto = new UserResponseDTO();
 		try {
-			User user = userDto.toModel(userDto);
+			User user = new User(userName);
 			UserEntity entity = user.toEntity(user);
-			UserEntity savedUser = userRepo.save(entity);
-			if(savedUser != null)
+			UserEntity userEntity = userRepo.findByUserName(entity.getUserName());
+			if(userEntity != null)
 			{
-				System.out.println("user is saved");
-				
-				user.setId(savedUser.getId());
-				user.setUserName(savedUser.getUserName());
+				user.setId(userEntity.getId());
+				user.setUserName(userEntity.getUserName());
+				user.setEmail(userEntity.getEmail());
+				user.setActive(userEntity.getActive());
 				BeanUtils.copyProperties(user, userResponsedto);
 			}
 		}
 		catch(Exception e) {
-			System.out.println("UserServiceImpl addUser failed"+e);
+			System.out.println("UserServiceImpl findByUserName failed"+e);	
 		}
 		return userResponsedto;
+	}
+	
+	@Override
+	public UserResponseDTO updateUser(Long id, UserRequestDTO userDto) {
+		
+		UserEntity userEntity = userRepo.findUserByid(id);
+		UserResponseDTO userResponsedto = new UserResponseDTO();
+		if(userEntity == null)
+		{
+			System.out.println("The user doesn't exists!!!");
+			return null;
+		}
+		else
+		{
+			User user = userDto.toModel(userDto);
+			UserEntity entity = user.toEntity(user);
+			UserEntity savedUser = userRepo.save(entity);
+			user.setId(savedUser.getId());
+			user.setUserName(savedUser.getUserName());
+			user.setEmail(savedUser.getEmail());
+			user.setActive(savedUser.getActive());
+			BeanUtils.copyProperties(user, userResponsedto);
+		}
+		return userResponsedto;
+	}
+
+	
+	@Override
+	public void deleteUser(Long id) {
+		UserEntity userEntity = userRepo.findUserByid(id);
+		if(userEntity == null)
+		{
+			System.out.println("The user doesn't exists!!!");
+		}
+		else
+		{
+			userRepo.delete(userEntity);
+		}
 	}
 
 }

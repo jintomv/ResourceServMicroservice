@@ -58,6 +58,7 @@ public class User {
 		return "user [id=" + this.id + ", userName="
 				+ this.userName + ",email="+this.email+",password="+this.password+",active="+this.active+"]";
 	}
+	
 	public UserEntity toEntity(User user)
 	{
 		UserEntity userEntity = new UserEntity();
@@ -73,9 +74,21 @@ public class User {
 		return userEntity;
 	}
 	
+	/**
+	 * user bean that returns with user id
+	 * @param id
+	 */
 	public User(Long id)
 	{
 		this.id = id;
+	}
+	
+	/**
+	 * user bean that returns with user name
+	 * @param id
+	 */
+	public User(String userName) {
+		this.userName = userName;
 	}
 
 }

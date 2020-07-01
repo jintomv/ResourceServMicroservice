@@ -1,8 +1,6 @@
 package com.security.ResourceServer.v1.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.security.ResourceServer.v1.Entity.UserEntity;
@@ -21,5 +19,11 @@ public interface UserRepository extends JpaRepository<UserEntity, Long>{
 	 * @return
 	 */
 	UserEntity findUserByid(Long id);
-
+	
+	/**
+	 * Method that fetches userdetails according the requested {userName}
+	 * @param userName
+	 * @return
+	 */
+	UserEntity findByUserName(String userName);
 }

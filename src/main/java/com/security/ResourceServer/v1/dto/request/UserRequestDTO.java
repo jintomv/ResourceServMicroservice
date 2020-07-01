@@ -16,13 +16,11 @@ public class UserRequestDTO {
 
 	//@NotNull
 	protected Long id;
-	
 
 	@Size(min = 3, max = 15, message = "Username must be between 3 and 15 characters")
 	protected String userName;
 	
-	@JsonIgnore
-	private String password;
+	protected String password;
 	
 	@Email(message = "Email should be valid")
 	private String email;
@@ -69,6 +67,7 @@ public class UserRequestDTO {
 		return password;
 	}
 
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
