@@ -52,6 +52,7 @@ public class ResourceServerConfiguration extends WebSecurityConfigurerAdapter{
 			.antMatchers(HttpMethod.GET,"/v1/fetchUser/{id}").permitAll()
 			//.antMatchers(HttpMethod.GET,"/v1/findByUserName/{userName}").permitAll()
 			.antMatchers(HttpMethod.GET,"/getAll").permitAll()
+			.antMatchers(HttpMethod.GET,"/findUserList").permitAll()
 			.antMatchers("/v1/addUser").permitAll()
 			.antMatchers(HttpMethod.PUT,"/v1/updateUser/{userId}").permitAll()
 			.antMatchers(HttpMethod.DELETE,"{userId}").permitAll()
