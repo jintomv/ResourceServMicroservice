@@ -3,11 +3,11 @@ package com.security.ResourceServer;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class ResourceServerApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//@SpringBootTest
+//class ResourceServerApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}

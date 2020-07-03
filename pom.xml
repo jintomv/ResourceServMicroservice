@@ -16,6 +16,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<junit.platform.version>1.5.2</junit.platform.version>
 	</properties>
 
 	<dependencies>
@@ -59,7 +60,7 @@
     <artifactId>mockwebserver</artifactId>
     <version>4.3.1</version>
     <scope>test</scope>
-</dependency>
+</dependency>-->
 	
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -71,7 +72,7 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>-->
+		</dependency>
 		<!-- junit 5 -->
         <dependency>
 			<groupId>org.junit.jupiter</groupId>
@@ -86,10 +87,10 @@
 		 
 		<!-- https://mvnrepository.com/artifact/org.junit.platform/junit-platform-runner -->
 		<dependency>
-    		<groupId>org.junit.platform</groupId>
-    		<artifactId>junit-platform-runner</artifactId>
-    		<version>1.5.1</version>
-    		<scope>test</scope>
+			<groupId>org.junit.platform</groupId>
+			<artifactId>junit-platform-runner</artifactId>
+			<version>${junit.platform.version}</version>
+			<scope>test</scope>
 		</dependency>
 
 		<!-- <dependency>

@@ -3,9 +3,7 @@ package com.security.ResourceServer.v1.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,7 +17,7 @@ import com.security.ResourceServer.v1.dto.request.UserRequestDTO;
 import com.security.ResourceServer.v1.dto.response.UserResponseDTO;
 import com.security.ResourceServer.v1.service.UserService;
 /**
- * 
+ * @author jinto varghese
  *
  */
 @RestController(value="UserController")
@@ -29,7 +27,7 @@ public class UserDetailsController {
 	@Autowired
 	UserService userservice;
 	/**
-	 * Contr
+	 * Controller
 	 * @param id
 	 * @param userDTO
 	 * @return
@@ -41,6 +39,14 @@ public class UserDetailsController {
 			) throws Exception {
 		UserResponseDTO userResponseDTO = userservice.findUserByID(id);
 		return ResponseEntity.ok(userResponseDTO);
+	}
+	
+	
+	@GetMapping("/getAll")
+	public ResponseEntity<UserResponseDTO> fetchAllUsers() throws Exception{
+		UserResponseDTO userResponseDTO = userservice.retrieveAllUsers();
+		return ResponseEntity.ok(userResponseDTO);
+		
 	}
 	
 	/**
@@ -55,12 +61,6 @@ public class UserDetailsController {
 	}
 	
 	
-	@PostMapping("/v1/useradd")
-	public ResponseEntity<UserResponseDTO> addUsers(){
-		UserResponseDTO userDTO = new UserResponseDTO();
-		userDTO.setUserName("This is success");
-		return ResponseEntity.ok(userDTO);
-	}
 	/**
 	 * This API updates an user object.
 	 * @param userId
@@ -85,10 +85,16 @@ public class UserDetailsController {
 	}
 	
 	
-	
-	@GetMapping("/v1/findByUserName/{userName}")
-	public ResponseEntity<UserResponseDTO> fetchByUserName(@PathVariable String userName)  throws Exception{
-		UserResponseDTO userResponseDTO = userservice.findByUserName(userName);
+	/**
+	 * Api for fetching user objects according to
+	 * @param firstName
+	 * @param lastName
+	 * @return
+	 * @throws Exception
+	 */
+	@GetMapping("/findUserList")
+	public ResponseEntity<UserResponseDTO> fetchByFirstNameAndLastName(@PathVariable String firstName,@PathVariable String lastName)  throws Exception{
+		UserResponseDTO userResponseDTO = userservice.retrieveByFirstNameAndLastName(firstName,lastName);
 		return ResponseEntity.ok(userResponseDTO);
 	}
 	

@@ -1,15 +1,25 @@
 package com.security.ResourceServer.v1.model;
 
-import com.security.ResourceServer.v1.Entity.UserEntity;
+import java.util.Date;
 
+import com.security.ResourceServer.v1.Entity.UserEntity;
+/**
+ * 
+ * @author jinto varghese
+ *
+ */
 public class User {
 	
 	private Long id;
-	private String userName;
-	private String email;
-	private String password;
-	private boolean active;
-	
+	private String firstname;
+	private String  lastname;
+	private String  gender;
+	private Date dob;
+	private String   address;
+	private String  userMail;
+	private Long phoneno;
+	private String  occupation;
+	private String  qualification;
 	
 	
 	
@@ -27,36 +37,91 @@ public class User {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public boolean getActive() {
-		return active;
-	}
-	public void setActive(boolean active) {
-		this.active = active;
-	}
-	public String getEmail() {
-		return email;
+	
+	public String getFirstname() {
+		return firstname;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
-	
+
+	public String getLastname() {
+		return lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public Date getDob() {
+		return dob;
+	}
+
+	public void setDob(Date dob) {
+		this.dob = dob;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getUserMail() {
+		return userMail;
+	}
+
+	public void setUserMail(String userMail) {
+		this.userMail = userMail;
+	}
+
+	public Long getPhoneno() {
+		return phoneno;
+	}
+
+	public void setPhoneno(Long phoneno) {
+		this.phoneno = phoneno;
+	}
+
+	public String getOccupation() {
+		return occupation;
+	}
+
+	public void setOccupation(String occupation) {
+		this.occupation = occupation;
+	}
+
+	public String getQualification() {
+		return qualification;
+	}
+
+	public void setQualification(String qualification) {
+		this.qualification = qualification;
+	}
+
 	@Override
 	public String toString() {
-		return "user [id=" + this.id + ", userName="
-				+ this.userName + ",email="+this.email+",password="+this.password+",active="+this.active+"]";
+		return "UserEntity [id=" + this.id + ","
+				+ "firstname=" + this.firstname + ","
+				+ "lastname=" + this.lastname + ","
+				+ "gender=" + this.gender + ","
+				+ "dob=" + this.dob + ","
+				+ "address=" + this.address + ","
+				+ "userMail=" + this.userMail + ","
+				+ "phoneno=" + this.phoneno + ","
+				+ "occupation=" + this.occupation + ","
+				+ "qualification=" + this.qualification + "]";
 	}
 	
 	public UserEntity toEntity(User user)
@@ -64,15 +129,21 @@ public class User {
 		UserEntity userEntity = new UserEntity();
 		try {
 			userEntity.setId(user.getId());
-			userEntity.setUserName(user.getUserName());
-			userEntity.setPassword(user.getPassword());
-			userEntity.setEmail(user.getEmail());
-			userEntity.setActive(user.getActive());
+			userEntity.setFirstname(user.getFirstname());
+			userEntity.setLastname(user.getLastname());
+			userEntity.setGender(user.getGender());
+			userEntity.setDob(user.getDob());
+			userEntity.setAddress(user.getAddress());
+			userEntity.setUserMail(user.getUserMail());
+			userEntity.setPhoneno(user.getPhoneno());
+			userEntity.setOccupation(user.getOccupation());
+			userEntity.setQualification(user.getQualification());
 		}
 		catch(Exception e) {
 		}
 		return userEntity;
 	}
+	
 	
 	/**
 	 * user bean that returns with user id
@@ -84,11 +155,13 @@ public class User {
 	}
 	
 	/**
-	 * user bean that returns with user name
-	 * @param id
+	 * user bean that returns with
+	 * @param firstName
+	 * @param lastName
 	 */
-	public User(String userName) {
-		this.userName = userName;
+	public User(String firstName, String lastName)
+	{
+		this.firstname = firstName;
+		this.lastname = lastName;
 	}
-
 }
